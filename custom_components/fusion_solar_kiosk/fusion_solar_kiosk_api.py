@@ -2,7 +2,7 @@
 import logging
 import html
 import json
-from .fusionsolar import Client, PandasClient, HTTPError
+from .fusionsolar import Client, PandasClient
 import  pandas as pd
 
 from .const import (
