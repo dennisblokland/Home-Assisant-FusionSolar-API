@@ -42,7 +42,7 @@ class FusionSolarKioksApi:
                 
             return devkpi[ATTR_DATA][ATTR_DATA_ITEMMAP]
 
-        except HTTPError as error:
+        except Exception as error:
             _LOGGER.error(error)
             _LOGGER.debug(response.text)
 
