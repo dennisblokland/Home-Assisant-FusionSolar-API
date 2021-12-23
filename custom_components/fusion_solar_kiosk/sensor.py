@@ -36,6 +36,7 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
     async def async_update_data():
         """Fetch data"""
         data = {}
+        api = FusionSolarKioksApi()
         for kiosk in config[CONF_KIOSKS]:
             data[kiosk['username']] = {
                 ATTR_DATA_REALKPI: await hass.async_add_executor_job(api.getRealTimeKpi, kiosk['username'], kiosk['password'])
