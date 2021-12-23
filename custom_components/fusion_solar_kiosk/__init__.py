@@ -88,6 +88,7 @@ class FusionSolarKioskPowerEntity(CoordinatorEntity, Entity):
         coordinator,
         username,
         password,
+        kioskName,
         idSuffix,
         nameSuffix,
         attribute,
@@ -96,6 +97,7 @@ class FusionSolarKioskPowerEntity(CoordinatorEntity, Entity):
         super().__init__(coordinator)
         self._username = username
         self._password = password
+        self._kioskName = kioskName
         self._idSuffix = idSuffix
         self._nameSuffix = nameSuffix
         self._attribute = attribute
