@@ -58,9 +58,7 @@ class FusionSolarKioskEnergyEntity(CoordinatorEntity, SensorEntity):
 
     @property
     def state(self) -> float:
-        _LOGGER.error(self._attribute)
-        _LOGGER.error(self.coordinator.data)
-        return float(self.coordinator.data[self._attribute]) if self.coordinator.data else None
+        return float(self.coordinator.data[self._username][ATTR_DATA_REALKPI][self._attribute]) if self.coordinator.data[self._username][ATTR_DATA_REALKPI] else None
 
     @property
     def unique_id(self) -> str:
@@ -114,7 +112,7 @@ class FusionSolarKioskPowerEntity(CoordinatorEntity, Entity):
 
     @property
     def state(self):
-        return float(self.coordinator.data[self._attribute]) if self.coordinator.data else None
+        return float(self.coordinator.data[self._username][ATTR_DATA_REALKPI][self._attribute]) if self.coordinator.data[self._username][ATTR_DATA_REALKPI] else None
 
     @property
     def unique_id(self) -> str:
