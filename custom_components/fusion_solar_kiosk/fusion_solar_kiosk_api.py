@@ -44,7 +44,6 @@ class FusionSolarKioksApi:
 
         except Exception as error:
             _LOGGER.error(error)
-            _LOGGER.debug(response.text)
 
     
         return {
