@@ -2,7 +2,7 @@
 import logging
 import html
 import json
-from .fusionsolar import Client, PandasClient
+from .fusionsolar import Client, PandasClient, HTTPError
 import  pandas as pd
 
 from .const import (
@@ -42,13 +42,10 @@ class FusionSolarKioksApi:
                 
             return devkpi[ATTR_DATA][ATTR_DATA_ITEMMAP]
 
-        except FusionSolarKioskApiError as error:
+        except HTTPError as error:
             _LOGGER.error(error)
             _LOGGER.debug(response.text)
 
-        except FusionSolarKioskApiError as error:
-            _LOGGER.error(error)
-            _LOGGER.debug(response.text)
     
         return {
             ATTR_SUCCESS: False
