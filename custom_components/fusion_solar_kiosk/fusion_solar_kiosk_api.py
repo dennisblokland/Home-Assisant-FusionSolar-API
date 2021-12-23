@@ -2,7 +2,7 @@
 import logging
 import html
 import json
-from FusionSolar import Client, PandasClient
+from fusionsolar import Client, PandasClient
 import pandas as pd
 
 from .const import (
@@ -14,7 +14,6 @@ from .const import (
     ATTR_REALTIME_POWER,
     ATTR_TOTAL_CURRENT_DAY_ENERGY,
     ATTR_TOTAL_CURRENT_MONTH_ENERGY,
-    ATTR_TOTAL_CURRENT_YEAR_ENERGY,
     ATTR_TOTAL_LIFETIME_ENERGY,
 )
 

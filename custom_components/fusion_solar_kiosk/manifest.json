@@ -3,7 +3,7 @@
   "name": "FusionSolar Kiosk",
   "documentation": "https://github.com/dennisblokland/Home-Assisant-FusionSolar-API",
   "issue_tracker": "https://github.com/dennisblokland/Home-Assisant-FusionSolar-API/issues",
-  "dependencies": [],
+  "dependencies": ["pandas"],
   "config_flow": false,
   "codeowners": [
     "@dennisblokland"
