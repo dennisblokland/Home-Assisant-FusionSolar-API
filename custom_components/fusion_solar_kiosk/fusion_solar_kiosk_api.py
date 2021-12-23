@@ -31,7 +31,7 @@ class FusionSolarKioksApi:
                 station_code = sl['data'][0]['stationCode']
                 stationkpi = client.get_station_kpi_real(station_code)
                 dl = client.get_dev_list(station_code)
-                devkpi = client.get_dev_kpi_real(dl['data'][0]['devTypeId'], dl['data'][0]['devIds'])
+                devkpi = client.get_dev_kpi_real(dl['data'][0]['devTypeId'], dl['data'][0]['id'])
 
                 data[ATTR_REALTIME_POWER] = devkpi['data'][0][ATTR_DATA_ITEMMAP]['active_power']
 
