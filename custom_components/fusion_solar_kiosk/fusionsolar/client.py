@@ -74,7 +74,7 @@ class Client:
             user_name: str,
             system_code: str,
             max_retry: int = 10,
-            base_url: str = "https://intl.fusionsolar.huawei.com/thirdData"
+            base_url: str = "https://eu5.fusionsolar.huawei.com/thirdData"
     ):
         self.user_name = user_name
         self.system_code = system_code
