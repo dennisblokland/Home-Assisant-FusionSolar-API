@@ -58,6 +58,8 @@ class FusionSolarKioskEnergyEntity(CoordinatorEntity, SensorEntity):
 
     @property
     def state(self) -> float:
+        _LOGGER.error(self._attribute)
+        _LOGGER.error(self.coordinator.data)
         return float(self.coordinator.data[self._attribute]) if self.coordinator.data else None
 
     @property
