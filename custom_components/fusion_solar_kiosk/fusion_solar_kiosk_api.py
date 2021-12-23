@@ -38,8 +38,10 @@ class FusionSolarKioksApi:
                 data[ATTR_TOTAL_CURRENT_DAY_ENERGY] = stationkpi['data'][0][ATTR_DATA_ITEMMAP]['day_power']
                 data[ATTR_TOTAL_CURRENT_MONTH_ENERGY] = stationkpi['data'][0][ATTR_DATA_ITEMMAP]['month_power']
                 data[ATTR_TOTAL_LIFETIME_ENERGY] = stationkpi['data'][0][ATTR_DATA_ITEMMAP]['total_power']
+                _LOGGER.info(data)
+                return data
                 
-            return data
+            
 
         except Exception as error:
             _LOGGER.error(error)
