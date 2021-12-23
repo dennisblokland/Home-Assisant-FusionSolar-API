@@ -3,7 +3,7 @@ import logging
 import html
 import json
 from .fusionsolar import Client, PandasClient
-from . import  pandas as pd
+import  pandas as pd
 
 from .const import (
     ATTR_DATA,
