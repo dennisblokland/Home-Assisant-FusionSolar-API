@@ -3,7 +3,7 @@ import logging
 import html
 import json
 from .fusionsolar import Client, PandasClient
-import pandas as pd
+from . import  pandas as pd
 
 from .const import (
     ATTR_DATA,
@@ -17,7 +17,6 @@ from .const import (
     ATTR_TOTAL_LIFETIME_ENERGY,
 )
 
-from requests import get
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -26,7 +25,6 @@ class FusionSolarKioksApi:
     def getRealTimeKpi(self, username: str, password: str):
 
         try:
-            response = get()
             data = {}
             with PandasClient(user_name=username, system_code=password) as client:
                 sl = client.get_station_list()
