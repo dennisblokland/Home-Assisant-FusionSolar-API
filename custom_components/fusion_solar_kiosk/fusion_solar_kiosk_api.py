@@ -32,15 +32,14 @@ class FusionSolarKioksApi:
                 stationkpi = client.get_station_kpi_real(station_code)
                 dl = client.get_dev_list(station_code)
                 devkpi = client.get_dev_kpi_real( dl['data'][0]['id'],dl['data'][0]['devTypeId'])
-
+                
                 data[ATTR_REALTIME_POWER] = devkpi['data'][0][ATTR_DATA_ITEMMAP]['active_power']
 
                 data[ATTR_TOTAL_CURRENT_DAY_ENERGY] = stationkpi['data'][0][ATTR_DATA_ITEMMAP]['day_power']
                 data[ATTR_TOTAL_CURRENT_MONTH_ENERGY] = stationkpi['data'][0][ATTR_DATA_ITEMMAP]['month_power']
                 data[ATTR_TOTAL_LIFETIME_ENERGY] = stationkpi['data'][0][ATTR_DATA_ITEMMAP]['total_power']
-
                 
-            return devkpi[ATTR_DATA][ATTR_DATA_ITEMMAP]
+            return data
 
         except Exception as error:
             _LOGGER.error(error)
