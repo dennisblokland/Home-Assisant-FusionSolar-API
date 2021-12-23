@@ -32,7 +32,8 @@ class FusionSolarKioskEnergyEntity(CoordinatorEntity, SensorEntity):
     def __init__(
         self,
         coordinator,
-        kioskId,
+        username,
+        password,
         kioskName,
         idSuffix,
         nameSuffix,
@@ -40,7 +41,8 @@ class FusionSolarKioskEnergyEntity(CoordinatorEntity, SensorEntity):
     ):
         """Initialize the entity"""
         super().__init__(coordinator)
-        self._kioskId = kioskId
+        self._username = username
+        self._password = password
         self._kioskName = kioskName
         self._idSuffix = idSuffix
         self._nameSuffix = nameSuffix
@@ -52,15 +54,15 @@ class FusionSolarKioskEnergyEntity(CoordinatorEntity, SensorEntity):
 
     @property
     def name(self) -> str:
-        return f'{self._kioskName} ({self._kioskId}) - {self._nameSuffix}'
+        return f'{self._kioskName} ({self.username}) - {self._nameSuffix}'
 
     @property
     def state(self) -> float:
-        return float(self.coordinator.data[self._kioskId][ATTR_DATA_REALKPI][self._attribute]) if self.coordinator.data[self._kioskId][ATTR_DATA_REALKPI] else None
+        return float(self.coordinator.data[self.username][ATTR_DATA_REALKPI][self._attribute]) if self.coordinator.data[self.username][ATTR_DATA_REALKPI] else None
 
     @property
     def unique_id(self) -> str:
-        return f'{DOMAIN}-{self._kioskId}-{self._idSuffix}'
+        return f'{DOMAIN}-{self.username}-{self._idSuffix}'
 
     @property
     def unit_of_measurement(self) -> str:
@@ -84,16 +86,16 @@ class FusionSolarKioskPowerEntity(CoordinatorEntity, Entity):
     def __init__(
         self,
         coordinator,
-        kioskId,
-        kioskName,
+        username,
+        password,
         idSuffix,
         nameSuffix,
         attribute,
     ):
         """Initialize the entity"""
         super().__init__(coordinator)
-        self._kioskId = kioskId
-        self._kioskName = kioskName
+        self._username = username
+        self._password = password
         self._idSuffix = idSuffix
         self._nameSuffix = nameSuffix
         self._attribute = attribute
@@ -104,15 +106,15 @@ class FusionSolarKioskPowerEntity(CoordinatorEntity, Entity):
 
     @property
     def name(self):
-        return f'{self._kioskName} ({self._kioskId}) - {self._nameSuffix}'
+        return f'{self._kioskName} ({self.username}) - {self._nameSuffix}'
 
     @property
     def state(self):
-        return float(self.coordinator.data[self._kioskId][ATTR_DATA_REALKPI][self._attribute]) if self.coordinator.data[self._kioskId][ATTR_DATA_REALKPI] else None
+        return float(self.coordinator.data[self.username][self._attribute]) if self.coordinator.data[self.username] else None
 
     @property
     def unique_id(self) -> str:
-        return f'{DOMAIN}-{self._kioskId}-{self._idSuffix}'
+        return f'{DOMAIN}-{self.username}-{self._idSuffix}'
 
     @property
     def unit_of_measurement(self):

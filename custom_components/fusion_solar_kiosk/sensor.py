@@ -33,11 +33,10 @@ _LOGGER = logging.getLogger(__name__)
 async def async_setup_platform(hass, config, async_add_entities, discovery_info=None):
     async def async_update_data():
         """Fetch data"""
-        api = FusionSolarKioksApi('https://eu5.fusionsolar.huawei.com')
         data = {}
         for kiosk in config[CONF_KIOSKS]:
-            data[kiosk['id']] = {
-                ATTR_DATA_REALKPI: await hass.async_add_executor_job(api.getRealTimeKpi, kiosk['id'])
+            data[kiosk['username']] = {
+                ATTR_DATA_REALKPI: await hass.async_add_executor_job(api.getRealTimeKpi, kiosk['username'], kiosk['password'])
             }
 
         return data
@@ -46,7 +45,7 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
     coordinator = DataUpdateCoordinator(
         hass,
         _LOGGER,
-        name='FusionSolarKiosk',
+        name='FusionSolarAPI',
         update_method=async_update_data,
         update_interval=timedelta(seconds=300),
     )
@@ -57,7 +56,8 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
     async_add_entities(
         FusionSolarKioskSensorRealtimePower(
             coordinator,
-            kiosk['id'],
+            kiosk['username'],
+            kiosk['password'],
             kiosk['name'],
             ID_REALTIME_POWER,
             NAME_REALTIME_POWER,
@@ -67,7 +67,8 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
     async_add_entities(
         FusionSolarKioskSensorTotalCurrentDayEnergy(
             coordinator,
-            kiosk['id'],
+            kiosk['username'],
+            kiosk['password'],
             kiosk['name'],
             ID_TOTAL_CURRENT_DAY_ENERGY,
             NAME_TOTAL_CURRENT_DAY_ENERGY,
@@ -77,27 +78,20 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
     async_add_entities(
         FusionSolarKioskSensorTotalCurrentMonthEnergy(
             coordinator,
-            kiosk['id'],
+            kiosk['username'],
+            kiosk['password'],
             kiosk['name'],
             ID_TOTAL_CURRENT_MONTH_ENERGY,
             NAME_TOTAL_CURRENT_MONTH_ENERGY,
             ATTR_TOTAL_CURRENT_MONTH_ENERGY,
         ) for kiosk in config[CONF_KIOSKS]
     )
-    async_add_entities(
-        FusionSolarKioskSensorTotalCurrentYearEnergy(
-            coordinator,
-            kiosk['id'],
-            kiosk['name'],
-            ID_TOTAL_CURRENT_YEAR_ENERGY,
-            NAME_TOTAL_CURRENT_YEAR_ENERGY,
-            ATTR_TOTAL_CURRENT_YEAR_ENERGY,
-        ) for kiosk in config[CONF_KIOSKS]
-    )
+
     async_add_entities(
         FusionSolarKioskSensorTotalLifetimeEnergy(
             coordinator,
-            kiosk['id'],
+            kiosk['username'],
+            kiosk['password'],
             kiosk['name'],
             ID_TOTAL_LIFETIME_ENERGY,
             NAME_TOTAL_LIFETIME_ENERGY,
@@ -114,9 +108,5 @@ class FusionSolarKioskSensorTotalCurrentDayEnergy(FusionSolarKioskEnergyEntity):
 
 class FusionSolarKioskSensorTotalCurrentMonthEnergy(FusionSolarKioskEnergyEntity):
     pass
-
-class FusionSolarKioskSensorTotalCurrentYearEnergy(FusionSolarKioskEnergyEntity):
-    pass
-
 class FusionSolarKioskSensorTotalLifetimeEnergy(FusionSolarKioskEnergyEntity):
     pass
