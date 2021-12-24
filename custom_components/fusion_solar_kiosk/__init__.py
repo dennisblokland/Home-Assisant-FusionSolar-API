@@ -8,8 +8,10 @@ from homeassistant.components.sensor import STATE_CLASS_TOTAL_INCREASING, Sensor
 from homeassistant.const import (
     DEVICE_CLASS_ENERGY,
     DEVICE_CLASS_POWER,
+    DEVICE_CLASS_VOLTAGE,
     ENERGY_KILO_WATT_HOUR,
     POWER_WATT,
+    ELECTRIC_POTENTIAL_VOLT,
 )
 from homeassistant.helpers.entity import Entity
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
@@ -26,9 +28,7 @@ async def async_setup(hass: HomeAssistant, config: Config) -> bool:
     """Set up the FusionSolar Kiosk component."""
     return True
 
-
-class FusionSolarKioskEnergyEntity(CoordinatorEntity, SensorEntity):
-    """Base class for all FusionSolarKioskEnergy entities."""
+class FusionSolarKioskBaseEntity(CoordinatorEntity, Entity):
     def __init__(
         self,
         coordinator,
@@ -39,7 +39,7 @@ class FusionSolarKioskEnergyEntity(CoordinatorEntity, SensorEntity):
         nameSuffix,
         attribute,
     ):
-        """Initialize the entity"""
+
         super().__init__(coordinator)
         self._username = username
         self._password = password
@@ -49,20 +49,22 @@ class FusionSolarKioskEnergyEntity(CoordinatorEntity, SensorEntity):
         self._attribute = attribute
 
     @property
-    def device_class(self) -> str:
-        return DEVICE_CLASS_ENERGY
-
-    @property
-    def name(self) -> str:
+    def name(self):
         return f'{self._kioskName} ({self._username}) - {self._nameSuffix}'
-
-    @property
-    def state(self) -> float:
-        return float(self.coordinator.data[self._username][ATTR_DATA_REALKPI][self._attribute]) if self.coordinator.data[self._username][ATTR_DATA_REALKPI] else None
 
     @property
     def unique_id(self) -> str:
         return f'{DOMAIN}-{self._username}-{self._idSuffix}'
+
+class FusionSolarKioskEnergyEntity(FusionSolarKioskBaseEntity):
+    pass
+    @property
+    def device_class(self) -> str:
+        return DEVICE_CLASS_ENERGY
+
+    @property
+    def state(self) -> float:
+        return float(self.coordinator.data[self._username][ATTR_DATA_REALKPI][self._attribute]) if self.coordinator.data[self._username][ATTR_DATA_REALKPI] else None
 
     @property
     def unit_of_measurement(self) -> str:
@@ -81,43 +83,31 @@ class FusionSolarKioskEnergyEntity(CoordinatorEntity, SensorEntity):
         return self.unit_of_measurement
 
 
-class FusionSolarKioskPowerEntity(CoordinatorEntity, Entity):
-    """Base class for all FusionSolarKioskEnergy entities."""
-    def __init__(
-        self,
-        coordinator,
-        username,
-        password,
-        kioskName,
-        idSuffix,
-        nameSuffix,
-        attribute,
-    ):
-        """Initialize the entity"""
-        super().__init__(coordinator)
-        self._username = username
-        self._password = password
-        self._kioskName = kioskName
-        self._idSuffix = idSuffix
-        self._nameSuffix = nameSuffix
-        self._attribute = attribute
-
+class FusionSolarKioskPowerEntity(FusionSolarKioskBaseEntity):
+    pass
     @property
     def device_class(self):
         return DEVICE_CLASS_POWER
-
-    @property
-    def name(self):
-        return f'{self._kioskName} ({self._username}) - {self._nameSuffix}'
 
     @property
     def state(self):
         return self.coordinator.data[self._username][ATTR_DATA_REALKPI][self._attribute] if self.coordinator.data[self._username][ATTR_DATA_REALKPI] else None
 
     @property
-    def unique_id(self) -> str:
-        return f'{DOMAIN}-{self._username}-{self._idSuffix}'
+    def unit_of_measurement(self):
+        return POWER_WATT
+
+class FusionSolarKioskVoltageEntity(FusionSolarKioskBaseEntity):
+    pass
+    @property
+    def device_class(self):
+        return DEVICE_CLASS_VOLTAGE
+
+    @property
+    def state(self):
+        return self.coordinator.data[self._username][ATTR_DATA_REALKPI][self._attribute] if self.coordinator.data[self._username][ATTR_DATA_REALKPI] else None
 
     @property
     def unit_of_measurement(self):
-        return POWER_WATT
+        return ELECTRIC_POTENTIAL_VOLT
+
