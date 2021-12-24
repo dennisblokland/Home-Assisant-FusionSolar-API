@@ -13,7 +13,10 @@ from homeassistant.const import (
     ENERGY_KILO_WATT_HOUR,
     POWER_WATT,
     ELECTRIC_POTENTIAL_VOLT,
-    ELECTRIC_CURRENT_AMPERE
+    ELECTRIC_CURRENT_AMPERE,
+    DEVICE_CLASS_TEMPERATURE,
+    TEMP_CELSIUS,
+    PERCENTAGE
 )
 from homeassistant.helpers.entity import Entity
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
@@ -107,7 +110,7 @@ class FusionSolarKioskVoltageEntity(FusionSolarKioskBaseEntity):
 
     @property
     def state(self):
-        return self.coordinator.data[self._username][ATTR_DATA_REALKPI][self._attribute] if self.coordinator.data[self._username][ATTR_DATA_REALKPI] else None
+        return float(self.coordinator.data[self._username][ATTR_DATA_REALKPI][self._attribute]) if self.coordinator.data[self._username][ATTR_DATA_REALKPI] else None
 
     @property
     def unit_of_measurement(self):
@@ -121,8 +124,32 @@ class FusionSolarKioskCurrentEntity(FusionSolarKioskBaseEntity):
 
     @property
     def state(self):
-        return self.coordinator.data[self._username][ATTR_DATA_REALKPI][self._attribute] if self.coordinator.data[self._username][ATTR_DATA_REALKPI] else None
+        return float(self.coordinator.data[self._username][ATTR_DATA_REALKPI][self._attribute]) if self.coordinator.data[self._username][ATTR_DATA_REALKPI] else None
 
     @property
     def unit_of_measurement(self):
         return ELECTRIC_CURRENT_AMPERE
+class FusionSolarKioskTempratureEntity(FusionSolarKioskBaseEntity):
+    pass
+    @property
+    def device_class(self):
+        return DEVICE_CLASS_TEMPERATURE
+
+    @property
+    def state(self):
+        return float(self.coordinator.data[self._username][ATTR_DATA_REALKPI][self._attribute]) if self.coordinator.data[self._username][ATTR_DATA_REALKPI] else None
+
+    @property
+    def unit_of_measurement(self):
+        return TEMP_CELSIUS
+class FusionSolarKioskEfficiencyEntity(FusionSolarKioskBaseEntity):
+    pass
+
+    @property
+    def state(self):
+        return float(self.coordinator.data[self._username][ATTR_DATA_REALKPI][self._attribute]) if self.coordinator.data[self._username][ATTR_DATA_REALKPI] else None
+
+    @property
+    def unit_of_measurement(self):
+        return PERCENTAGE
+

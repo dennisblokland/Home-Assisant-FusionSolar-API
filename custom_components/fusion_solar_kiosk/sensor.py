@@ -4,7 +4,7 @@ import homeassistant.helpers.config_validation as cv
 import logging
 import voluptuous as vol
 
-from . import FusionSolarKioskEnergyEntity, FusionSolarKioskPowerEntity, FusionSolarKioskVoltageEntity, FusionSolarKioskCurrentEntity
+from . import FusionSolarKioskEnergyEntity, FusionSolarKioskPowerEntity, FusionSolarKioskVoltageEntity, FusionSolarKioskCurrentEntity, FusionSolarKioskTempratureEntity, FusionSolarKioskEfficiencyEntity
 
 from datetime import timedelta
 from homeassistant.components.sensor import PLATFORM_SCHEMA
@@ -101,6 +101,30 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
             ATTR_TOTAL_LIFETIME_ENERGY,
         ) for kiosk in config[CONF_KIOSKS]
     )
+    async_add_entities(
+        FusionSolarKioskTempratureEntity(
+            coordinator,
+            kiosk['username'],
+            kiosk['password'],
+            kiosk['name'],
+            ID_TEMPRATURE,
+            NAME_TEMPRATURE,
+            ATTR_TEMPRATURE,
+        ) for kiosk in config[CONF_KIOSKS]
+    )
+    async_add_entities(
+        FusionSolarKioskEfficiencyEntity(
+            coordinator,
+            kiosk['username'],
+            kiosk['password'],
+            kiosk['name'],
+            ID_EFFICIENCY,
+            NAME_EFFICIENCY,
+            ATTR_EFFICIENCY,
+        ) for kiosk in config[CONF_KIOSKS]
+    )
+
+
     for kiosk in config[CONF_KIOSKS]:
         async_add_entities(
             FusionSolarKioskVoltageEntity(
