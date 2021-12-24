@@ -9,7 +9,7 @@ from homeassistant.const import (
     DEVICE_CLASS_ENERGY,
     DEVICE_CLASS_POWER,
     ENERGY_KILO_WATT_HOUR,
-    POWER_KILO_WATT,
+    POWER_WATT,
 )
 from homeassistant.helpers.entity import Entity
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
@@ -120,4 +120,4 @@ class FusionSolarKioskPowerEntity(CoordinatorEntity, Entity):
 
     @property
     def unit_of_measurement(self):
-        return POWER_KILO_WATT
+        return POWER_WATT
