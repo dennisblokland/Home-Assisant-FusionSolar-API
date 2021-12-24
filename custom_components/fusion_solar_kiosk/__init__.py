@@ -9,9 +9,11 @@ from homeassistant.const import (
     DEVICE_CLASS_ENERGY,
     DEVICE_CLASS_POWER,
     DEVICE_CLASS_VOLTAGE,
+    DEVICE_CLASS_CURRENT,
     ENERGY_KILO_WATT_HOUR,
     POWER_WATT,
     ELECTRIC_POTENTIAL_VOLT,
+    ELECTRIC_CURRENT_AMPERE
 )
 from homeassistant.helpers.entity import Entity
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
@@ -111,3 +113,16 @@ class FusionSolarKioskVoltageEntity(FusionSolarKioskBaseEntity):
     def unit_of_measurement(self):
         return ELECTRIC_POTENTIAL_VOLT
 
+class FusionSolarKioskCurrentEntity(FusionSolarKioskBaseEntity):
+    pass
+    @property
+    def device_class(self):
+        return DEVICE_CLASS_CURRENT
+
+    @property
+    def state(self):
+        return self.coordinator.data[self._username][ATTR_DATA_REALKPI][self._attribute] if self.coordinator.data[self._username][ATTR_DATA_REALKPI] else None
+
+    @property
+    def unit_of_measurement(self):
+        return ELECTRIC_CURRENT_AMPERE
