@@ -35,7 +35,7 @@ class FusionSolarKioksApi:
                 devkpi = client.get_dev_kpi_real( dl['data'][0]['id'],dl['data'][0]['devTypeId'])
                 
                 data[ATTR_REALTIME_POWER] = round(devkpi['data'][0][ATTR_DATA_ITEMMAP]['active_power'] * 1000)
-                for i in range(1,8):
+                for i in range(1,9):
                     data[ATTR_VOLTAGE + str(i)] = round(devkpi['data'][0][ATTR_DATA_ITEMMAP]["pv" +  str(i) + "_u"])
 
 

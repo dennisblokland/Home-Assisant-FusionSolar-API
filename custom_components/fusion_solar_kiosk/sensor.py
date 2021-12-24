@@ -101,7 +101,7 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
             ATTR_TOTAL_LIFETIME_ENERGY,
         ) for kiosk in config[CONF_KIOSKS]
     )
-    for i in range(1,8):
+    for i in range(1,9):
         async_add_entities(
             FusionSolarKioskVoltageEntity(
                 coordinator,
