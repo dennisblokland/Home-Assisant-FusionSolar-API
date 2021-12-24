@@ -112,7 +112,7 @@ class FusionSolarKioskPowerEntity(CoordinatorEntity, Entity):
 
     @property
     def state(self):
-        return float(self.coordinator.data[self._username][ATTR_DATA_REALKPI][self._attribute]) if self.coordinator.data[self._username][ATTR_DATA_REALKPI] else None
+        return self.coordinator.data[self._username][ATTR_DATA_REALKPI][self._attribute] if self.coordinator.data[self._username][ATTR_DATA_REALKPI] else None
 
     @property
     def unique_id(self) -> str:
