@@ -62,7 +62,19 @@ class FusionSolarKioskBaseEntity(CoordinatorEntity, Entity):
         return f'{DOMAIN}-{self._username}-{self._idSuffix}'
 
 class FusionSolarKioskEnergyEntity(FusionSolarKioskBaseEntity):
-    pass
+    def __init__(
+    self,
+    coordinator,
+    username,
+    password,
+    kioskName,
+    idSuffix,
+    nameSuffix,
+    attribute,
+    ):
+
+        super().__init__(self,coordinator,username, password, kioskName, idSuffix, nameSuffix, attribute)
+
     @property
     def device_class(self) -> str:
         return DEVICE_CLASS_ENERGY
@@ -89,7 +101,18 @@ class FusionSolarKioskEnergyEntity(FusionSolarKioskBaseEntity):
 
 
 class FusionSolarKioskPowerEntity(FusionSolarKioskBaseEntity):
-    pass
+    def __init__(
+    self,
+    coordinator,
+    username,
+    password,
+    kioskName,
+    idSuffix,
+    nameSuffix,
+    attribute,
+    ):
+
+        super().__init__(self,coordinator,username, password, kioskName, idSuffix, nameSuffix, attribute)
     @property
     def device_class(self):
         return DEVICE_CLASS_POWER
@@ -103,7 +126,18 @@ class FusionSolarKioskPowerEntity(FusionSolarKioskBaseEntity):
         return POWER_WATT
 
 class FusionSolarKioskVoltageEntity(FusionSolarKioskBaseEntity):
-    pass
+    def __init__(
+    self,
+    coordinator,
+    username,
+    password,
+    kioskName,
+    idSuffix,
+    nameSuffix,
+    attribute,
+    ):
+
+        super().__init__(self,coordinator,username, password, kioskName, idSuffix, nameSuffix, attribute)
     @property
     def device_class(self):
         return DEVICE_CLASS_VOLTAGE
@@ -117,7 +151,18 @@ class FusionSolarKioskVoltageEntity(FusionSolarKioskBaseEntity):
         return ELECTRIC_POTENTIAL_VOLT
 
 class FusionSolarKioskCurrentEntity(FusionSolarKioskBaseEntity):
-    pass
+    def __init__(
+    self,
+    coordinator,
+    username,
+    password,
+    kioskName,
+    idSuffix,
+    nameSuffix,
+    attribute,
+    ):
+
+        super().__init__(self,coordinator,username, password, kioskName, idSuffix, nameSuffix, attribute)
     @property
     def device_class(self):
         return DEVICE_CLASS_CURRENT
@@ -130,7 +175,19 @@ class FusionSolarKioskCurrentEntity(FusionSolarKioskBaseEntity):
     def unit_of_measurement(self):
         return ELECTRIC_CURRENT_AMPERE
 class FusionSolarKioskTempratureEntity(FusionSolarKioskBaseEntity):
-    pass
+    def __init__(
+    self,
+    coordinator,
+    username,
+    password,
+    kioskName,
+    idSuffix,
+    nameSuffix,
+    attribute,
+    ):
+
+        super().__init__(self,coordinator,username, password, kioskName, idSuffix, nameSuffix, attribute)
+
     @property
     def device_class(self):
         return DEVICE_CLASS_TEMPERATURE
@@ -143,7 +200,18 @@ class FusionSolarKioskTempratureEntity(FusionSolarKioskBaseEntity):
     def unit_of_measurement(self):
         return TEMP_CELSIUS
 class FusionSolarKioskEfficiencyEntity(FusionSolarKioskBaseEntity):
-    pass
+    def __init__(
+    self,
+    coordinator,
+    username,
+    password,
+    kioskName,
+    idSuffix,
+    nameSuffix,
+    attribute,
+    ):
+
+        super().__init__(self,coordinator,username, password, kioskName, idSuffix, nameSuffix, attribute)
 
     @property
     def state(self):
