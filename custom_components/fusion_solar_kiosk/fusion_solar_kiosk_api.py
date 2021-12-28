@@ -53,6 +53,9 @@ class FusionSolarKioksApi:
 
         except Exception as error:
             _LOGGER.error(error)
+            return {
+                ATTR_SUCCESS: False
+            }   
 
     
         return {
