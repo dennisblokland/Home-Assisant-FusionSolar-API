@@ -4,7 +4,7 @@ Custom integration to integrate FusionSolar Kiosk with Home Assistant.
 import logging
 
 from homeassistant.core import Config, HomeAssistant
-from homeassistant.components.sensor import STATE_CLASS_TOTAL_INCREASING, SensorEntity
+from homeassistant.components.sensor import STATE_CLASS_TOTAL_INCREASING, SensorEntity, STATE_CLASS_MEASUREMENT
 from homeassistant.const import (
     DEVICE_CLASS_ENERGY,
     DEVICE_CLASS_POWER,
@@ -60,6 +60,10 @@ class FusionSolarKioskBaseEntity(CoordinatorEntity, Entity):
     @property
     def unique_id(self) -> str:
         return f'{DOMAIN}-{self._username}-{self._idSuffix}'
+
+    @property
+    def state_class(self) -> str:
+        return STATE_CLASS_MEASUREMENT
 
 class FusionSolarKioskEnergyEntity(FusionSolarKioskBaseEntity):
     def __init__(
