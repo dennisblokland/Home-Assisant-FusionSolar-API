@@ -63,17 +63,23 @@ class FusionSolarKioskBaseEntity(CoordinatorEntity, Entity):
 
 class FusionSolarKioskEnergyEntity(FusionSolarKioskBaseEntity):
     def __init__(
-    self,
-    coordinator,
-    username,
-    password,
-    kioskName,
-    idSuffix,
-    nameSuffix,
-    attribute,
+        self,
+        coordinator,
+        username,
+        password,
+        kioskName,
+        idSuffix,
+        nameSuffix,
+        attribute,
     ):
 
-        super().__init__(self,coordinator,username, password, kioskName, idSuffix, nameSuffix, attribute)
+        super().__init__(coordinator)
+        self._username = username
+        self._password = password
+        self._kioskName = kioskName
+        self._idSuffix = idSuffix
+        self._nameSuffix = nameSuffix
+        self._attribute = attribute
 
     @property
     def device_class(self) -> str:
@@ -102,17 +108,23 @@ class FusionSolarKioskEnergyEntity(FusionSolarKioskBaseEntity):
 
 class FusionSolarKioskPowerEntity(FusionSolarKioskBaseEntity):
     def __init__(
-    self,
-    coordinator,
-    username,
-    password,
-    kioskName,
-    idSuffix,
-    nameSuffix,
-    attribute,
+        self,
+        coordinator,
+        username,
+        password,
+        kioskName,
+        idSuffix,
+        nameSuffix,
+        attribute,
     ):
 
-        super().__init__(self,coordinator,username, password, kioskName, idSuffix, nameSuffix, attribute)
+        super().__init__(coordinator)
+        self._username = username
+        self._password = password
+        self._kioskName = kioskName
+        self._idSuffix = idSuffix
+        self._nameSuffix = nameSuffix
+        self._attribute = attribute
     @property
     def device_class(self):
         return DEVICE_CLASS_POWER
@@ -127,18 +139,23 @@ class FusionSolarKioskPowerEntity(FusionSolarKioskBaseEntity):
 
 class FusionSolarKioskVoltageEntity(FusionSolarKioskBaseEntity):
     def __init__(
-    self,
-    coordinator,
-    username,
-    password,
-    kioskName,
-    idSuffix,
-    nameSuffix,
-    attribute,
+        self,
+        coordinator,
+        username,
+        password,
+        kioskName,
+        idSuffix,
+        nameSuffix,
+        attribute,
     ):
 
-        super().__init__(self,coordinator,username, password, kioskName, idSuffix, nameSuffix, attribute)
-    @property
+        super().__init__(coordinator)
+        self._username = username
+        self._password = password
+        self._kioskName = kioskName
+        self._idSuffix = idSuffix
+        self._nameSuffix = nameSuffix
+        self._attribute = attribute
     def device_class(self):
         return DEVICE_CLASS_VOLTAGE
 
@@ -152,17 +169,23 @@ class FusionSolarKioskVoltageEntity(FusionSolarKioskBaseEntity):
 
 class FusionSolarKioskCurrentEntity(FusionSolarKioskBaseEntity):
     def __init__(
-    self,
-    coordinator,
-    username,
-    password,
-    kioskName,
-    idSuffix,
-    nameSuffix,
-    attribute,
+        self,
+        coordinator,
+        username,
+        password,
+        kioskName,
+        idSuffix,
+        nameSuffix,
+        attribute,
     ):
 
-        super().__init__(self,coordinator,username, password, kioskName, idSuffix, nameSuffix, attribute)
+        super().__init__(coordinator)
+        self._username = username
+        self._password = password
+        self._kioskName = kioskName
+        self._idSuffix = idSuffix
+        self._nameSuffix = nameSuffix
+        self._attribute = attribute
     @property
     def device_class(self):
         return DEVICE_CLASS_CURRENT
@@ -176,17 +199,23 @@ class FusionSolarKioskCurrentEntity(FusionSolarKioskBaseEntity):
         return ELECTRIC_CURRENT_AMPERE
 class FusionSolarKioskTempratureEntity(FusionSolarKioskBaseEntity):
     def __init__(
-    self,
-    coordinator,
-    username,
-    password,
-    kioskName,
-    idSuffix,
-    nameSuffix,
-    attribute,
+        self,
+        coordinator,
+        username,
+        password,
+        kioskName,
+        idSuffix,
+        nameSuffix,
+        attribute,
     ):
 
-        super().__init__(self,coordinator,username, password, kioskName, idSuffix, nameSuffix, attribute)
+        super().__init__(coordinator)
+        self._username = username
+        self._password = password
+        self._kioskName = kioskName
+        self._idSuffix = idSuffix
+        self._nameSuffix = nameSuffix
+        self._attribute = attribute
 
     @property
     def device_class(self):
@@ -201,17 +230,23 @@ class FusionSolarKioskTempratureEntity(FusionSolarKioskBaseEntity):
         return TEMP_CELSIUS
 class FusionSolarKioskEfficiencyEntity(FusionSolarKioskBaseEntity):
     def __init__(
-    self,
-    coordinator,
-    username,
-    password,
-    kioskName,
-    idSuffix,
-    nameSuffix,
-    attribute,
+        self,
+        coordinator,
+        username,
+        password,
+        kioskName,
+        idSuffix,
+        nameSuffix,
+        attribute,
     ):
 
-        super().__init__(self,coordinator,username, password, kioskName, idSuffix, nameSuffix, attribute)
+        super().__init__(coordinator)
+        self._username = username
+        self._password = password
+        self._kioskName = kioskName
+        self._idSuffix = idSuffix
+        self._nameSuffix = nameSuffix
+        self._attribute = attribute
 
     @property
     def state(self):
