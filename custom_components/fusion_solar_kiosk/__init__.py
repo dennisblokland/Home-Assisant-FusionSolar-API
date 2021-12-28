@@ -33,7 +33,7 @@ async def async_setup(hass: HomeAssistant, config: Config) -> bool:
     """Set up the FusionSolar Kiosk component."""
     return True
 
-class FusionSolarKioskBaseEntity(CoordinatorEntity, Entity):
+class FusionSolarKioskBaseEntity(CoordinatorEntity, SensorEntity):
     def __init__(
         self,
         coordinator,
