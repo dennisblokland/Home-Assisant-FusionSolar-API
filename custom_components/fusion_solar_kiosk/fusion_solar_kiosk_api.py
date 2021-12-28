@@ -8,6 +8,7 @@ import  pandas as pd
 from .const import (
     ATTR_DATA,
     ATTR_DATA_ITEMMAP,
+    ATTR_EFFICIENCY,
     ATTR_FAIL_CODE,
     ATTR_SUCCESS,
     ATTR_DATA_REALKPI,
@@ -37,7 +38,8 @@ class FusionSolarKioksApi:
                 devkpi = client.get_dev_kpi_real( dl['data'][0]['id'],dl['data'][0]['devTypeId'])
                 
                 data[ATTR_REALTIME_POWER] = round(devkpi['data'][0][ATTR_DATA_ITEMMAP]['active_power'] * 1000)
-                data[ATTR_TEMPRATURE] = devkpi['data'][0][ATTR_DATA_ITEMMAP]['temperature']
+                data[ATTR_TEMPRATURE] = devkpi['data'][0][ATTR_DATA_ITEMMAP][ATTR_TEMPRATURE]
+                data[ATTR_EFFICIENCY] = devkpi['data'][0][ATTR_DATA_ITEMMAP][ATTR_EFFICIENCY]
                 for i in range(1,9):
                     data[ATTR_VOLTAGE + str(i)] = devkpi['data'][0][ATTR_DATA_ITEMMAP]["pv" +  str(i) + "_u"]
                     data[ATTR_CURRENT + str(i)] = devkpi['data'][0][ATTR_DATA_ITEMMAP]["pv" +  str(i) + "_i"]
